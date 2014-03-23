@@ -19,29 +19,22 @@ bb.browser = function() {
       ds[p][s] = 0;
     };
 
-    o.print = function() {
-      console.log(ds);
-    };
-
     return o;
   })();
 
-  function prjClick(name) {
-    console.log("prj: " + name + " ");
+  function prjClick(prj, sample) {
+    console.log(prj, " - ", sample);
   }
 
-  function sampleClick(name) {
-    console.log("sample" + " " + name);
-  }
-
-  function createEl(elText, _class) {
+  function createEl(prj, sample, _class) {
     main.append("input")
         .attr("type", "checkbox")
+        .attr("id", prj + "_" + sample)
         .on("click", function() {
-          if (_class == "project") prjClick(elText);
-          if (_class == "sample") sampleClick(elText);
+          if (_class == "project") prjClick(prj, sample);
         });
-    main.append("span").text(elText).attr("class", _class);
+    var txt = (_class == "project") ? prj : sample;
+    main.append("span").text(txt).attr("class", _class);
   }
 
   function loadData(callback) {
@@ -55,11 +48,11 @@ bb.browser = function() {
   // {"depth":["18277","36013"],"snp_density":["18277.YNPRC.Indian.chr1","19466.YNPRC.Indian.chr1"]}
   function renderView(projects) {
     Object.keys(projects).forEach(function (name) {
+      createEl(name, "", "project");
       list.addPrj(name);
-      createEl(name, "project");
       projects[name].map(function(sample) {
         list.addSample(name, sample);
-        createEl(sample, "sample");
+        createEl(name, sample, "sample");
       });
     });
   }

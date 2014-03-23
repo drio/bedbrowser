@@ -1,27 +1,34 @@
 <!DOCTYPE html>
 <!-- vim ts=2 expandtab :-->
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>DNAism webapp Example</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="d3.v3.min.js"></script>
-    <script src="app.js"></script>
-  </head>
-  <body>
+<meta charset="utf-8">
+<title>DNAism webapp Example</title>
+<script src="d3.v3.min.js"></script>
+<script src="app.js"></script>
+<!--
+TODO: Server not properly setting mime types for css so chrome does not
+uses css styles. For the moment I will define them here.
+-->
+<style>
+@import url("style.css");
+.project {
+  color: red;
+}
 
-    <div id="main">
-    <!--
-        project1 <input name="your_name" value="your_value" type="checkbox"> <br>
-            project1-sample1 <input name="your_name" value="your_value" type="checkbox"> <br>
-            project1-sample2 <input name="your_name" value="your_value" type="checkbox"> <br>
-        project2 <input name="your_name" value="your_value" type="checkbox"> <br>
-             project2-sample22 <input name="your_name" value="your_value" type="checkbox"> <br>
-      -->
-    </div>
+.sample {
+  color: black;
+}
+</style>
 
-  </body>
-  <script>
-    bb.browser();
-  </script>
-</html>
+<div id="main">
+<!--
+project1 <input name="your_name" value="your_value" type="checkbox"> <br>
+    project1-sample1 <input name="your_name" value="your_value" type="checkbox"> <br>
+    project1-sample2 <input name="your_name" value="your_value" type="checkbox"> <br>
+project2 <input name="your_name" value="your_value" type="checkbox"> <br>
+     project2-sample22 <input name="your_name" value="your_value" type="checkbox"> <br>
+-->
+</div>
+
+<script>
+bb.browser();
+</script>
