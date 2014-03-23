@@ -16,25 +16,65 @@ bb.browser = function() {
     };
 
     o.addSample = function(p, s) {
-      ds[p][s] = 0;
+      ds[p][s] = false;
+    };
+
+    o.setAll = function(p, tf) {
+      main.selectAll("input")[0].forEach(function(e) {
+        if (e.id.indexOf(p) > -1) {
+          Object.keys(ds[p]).forEach(function(s) {
+            ds[p][s] = tf;
+          });
+          e.checked = tf;
+        }
+      });
+    };
+
+    o.set = function(p, s) {
+      ds[p][s] = !ds[p][s];
+    };
+
+
+    o.active = function() {
+      return ds;
     };
 
     return o;
   })();
 
-  function prjClick(prj, sample) {
-    console.log(prj, " - ", sample);
+  function click(prj, sample) {
+    list.toggle(prj, sample);
+    console.log(list.active());
   }
 
-  function createEl(prj, sample, _class) {
-    main.append("input")
-        .attr("type", "checkbox")
-        .attr("id", prj + "_" + sample)
-        .on("click", function() {
-          if (_class == "project") prjClick(prj, sample);
-        });
-    var txt = (_class == "project") ? prj : sample;
-    main.append("span").text(txt).attr("class", _class);
+  function createPrj(prj) {
+   var p =  main.append("p")
+                .text(prj).attr("class", "project");
+
+    p.append("a")
+     .attr("href", "#")
+     .text("all")
+     .on("click", function() { list.setAll(prj, true); });
+
+    p.append("a")
+     .attr("href", "#")
+     .text("none")
+     .on("click", function() { list.setAll(prj, name); });
+  }
+
+  function createSample(prj, sample) {
+    var i = main.append("p");
+
+    i.append("input")
+     .attr("type", "checkbox")
+     .attr("id", "[" + prj + "," + sample + "]")
+     .on("click", function() { list.set(prj, sample); });
+
+    i.append("text").text(sample);
+  }
+
+  function run() {
+    console.log(list.active());
   }
 
   function loadData(callback) {
@@ -45,14 +85,18 @@ bb.browser = function() {
       });
   }
 
-  // {"depth":["18277","36013"],"snp_density":["18277.YNPRC.Indian.chr1","19466.YNPRC.Indian.chr1"]}
   function renderView(projects) {
+    main.append("a")
+     .attr("href", "#")
+     .text("Run")
+     .on("click", run);
+
     Object.keys(projects).forEach(function (name) {
-      createEl(name, "", "project");
+      createPrj(name);
       list.addPrj(name);
       projects[name].map(function(sample) {
         list.addSample(name, sample);
-        createEl(name, sample, "sample");
+        createSample(name, sample);
       });
     });
   }
