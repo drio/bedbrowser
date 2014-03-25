@@ -1,8 +1,8 @@
-// vim ts=2 expandtab:
+// vim ts=2 expandtab ft=javascript:
 
 bb = { version: "0.0.1" };
-
 bb.main = d3.select("#main");
+bb.server = "http://localhost:5000";
 
 bb.browser = function() {
   var list,
