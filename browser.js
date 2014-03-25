@@ -2,10 +2,12 @@
 
 bb = { version: "0.0.1" };
 
+bb.main = d3.select("#main");
+
 bb.browser = function() {
   var list,
       mainURL = "/bedserver/api/v1.0",
-      main = d3.select("#main");
+      main = bb.main;
 
   list = (function() {
     var o = {},
@@ -74,7 +76,7 @@ bb.browser = function() {
   }
 
   function run() {
-    console.log(list.active());
+    bb.viz().init(list.active()).render();
   }
 
   function loadData(callback) {
@@ -86,6 +88,8 @@ bb.browser = function() {
   }
 
   function renderView(projects) {
+    main.html("");
+
     main.append("a")
      .attr("href", "#")
      .text("Run")
