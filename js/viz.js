@@ -30,8 +30,9 @@ bb.viz = function() {
 
     var source_bedserver = context.bedserver(bb.server);
     var metrics = [];
+    // {"depth":{"18277":true,"36013":true},"snp_density":{"18277.YNPRC.Indian.chr1":false,"19466.YNPRC.Indian.chr1":false}}
     Object.keys(data).forEach(function (prjName) {
-      Object.keys(prjName).forEach(function (sampleName) {
+      Object.keys(data[prjName]).forEach(function (sampleName) {
         if (data[prjName][sampleName])
           metrics.push(source_bedserver.metric(prjName, sampleName));
       });
@@ -51,8 +52,7 @@ bb.viz = function() {
 
   }
 
-  _viz.init = function(d) {
-
+  function clean() {
     main.html("");
 
     main.append("a")
@@ -62,7 +62,7 @@ bb.viz = function() {
 
     var p =  main.append("p").attr("class", "region");
 
-    p.text("Format: Chrm:start-end");
+    p.text("Format: Chrm:start-end (Chr17:1100000-1200000)");
 
     p.append("input")
       .attr("type", "text")
@@ -72,9 +72,16 @@ bb.viz = function() {
     p.append("a")
       .attr("href", "#")
       .text("Viz it!")
-      .on("click", null);
+      .on("click", function() {
+        clean();
+        horizon(1100000, 1200000, "Chr17");
+      });
+  }
 
+
+  _viz.init = function(d) {
     data = d;
+    clean();
     return _viz;
   }
 
