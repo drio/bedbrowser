@@ -2,7 +2,8 @@
 
 bb.viz = function() {
   var _viz = function () {},
-      main = bb.main,
+      plots = bb.plots,
+      main = bb.header,
       size = 1280,
       data;
 
@@ -15,7 +16,7 @@ bb.viz = function() {
                    .step(2);
 
 
-    main.selectAll(".axis")
+    plots.selectAll(".axis")
         .data(["top", "bottom"])
       .enter().append("div")
         .attr("class", function(d) { return d + " axis"; })
@@ -23,14 +24,14 @@ bb.viz = function() {
 
 
     // TODO: we will have to clean up
-    d3.select("body").append("div")
+    //d3.select("body").append("div")
+    plots.append("div")
         .attr("class", "rule")
         .call(context.rule());
 
 
     var source_bedserver = context.bedserver(bb.server);
     var metrics = [];
-    // {"depth":{"18277":true,"36013":true},"snp_density":{"18277.YNPRC.Indian.chr1":false,"19466.YNPRC.Indian.chr1":false}}
     Object.keys(data).forEach(function (prjName) {
       Object.keys(data[prjName]).forEach(function (sampleName) {
         if (data[prjName][sampleName])
@@ -39,7 +40,7 @@ bb.viz = function() {
     });
 
 
-    d3.select("body").selectAll(".horizon")
+    plots.selectAll(".horizon")
         .data(metrics)
       .enter().insert("div", ".bottom")
         .attr("class", "horizon")
@@ -58,7 +59,10 @@ bb.viz = function() {
     main.append("a")
      .attr("href", "#")
      .text("Back to browsing projects")
-     .on("click", bb.browser);
+     .on("click", function() {
+       plots.html("");
+       bb.browser();
+     });
 
     var p =  main.append("p").attr("class", "region");
 

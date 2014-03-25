@@ -1,13 +1,14 @@
 // vim ts=2 expandtab ft=javascript:
 
 bb = { version: "0.0.1" };
-bb.main = d3.select("#demo");
+bb.header = d3.select("#header");
+bb.plots = d3.select("#plots");
 bb.server = "http://localhost:5000";
 
 bb.browser = function() {
   var list,
       mainURL = "/bedserver/api/v1.0",
-      main = bb.main;
+      main = bb.header;
 
   list = (function() {
     var o = {},
