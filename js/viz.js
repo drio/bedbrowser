@@ -4,7 +4,7 @@ bb.viz = function() {
   var _viz = function () {},
       plots = bb.plots,
       main = bb.header,
-      size = 1280,
+      size = 900,
       data;
 
   function horizon(start, stop, chrm) {
