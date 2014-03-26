@@ -1,11 +1,10 @@
 // vim ts=2 expandtab ft=javascript:
 
-bb.viz = function() {
+bb.viz = function(data) {
   var _viz = function () {},
       plots = bb.plots,
       main = bb.header,
-      size = 900,
-      data;
+      size = 900;
 
   function horizon(start, stop, chrm) {
     var context = dnaism.context()
@@ -15,6 +14,9 @@ bb.viz = function() {
                    .chrm(chrm)
                    .step(2);
 
+    main.append("div")
+        .attr("class", "current-region")
+        .text(chrm + ":" + start + "-" + stop);
 
     plots.selectAll(".axis")
         .data(["top", "bottom"])
@@ -23,8 +25,6 @@ bb.viz = function() {
         .each(function(d) { d3.select(this).call(context.axis().ticks(12).orient(d)); });
 
 
-    // TODO: we will have to clean up
-    //d3.select("body").append("div")
     plots.append("div")
         .attr("class", "rule")
         .call(context.rule());
@@ -53,6 +53,22 @@ bb.viz = function() {
 
   }
 
+  function getRegion() {
+    var v = d3.select("input")[0][0].value,
+        _, result = {};
+
+    _  = v.split(":");
+    if (_.length !== 2) return null;
+
+    result["chrm"] = _[0];
+    _  = _[1].split("-");
+    if (_.length !== 2) return null;
+    result["start"] = +_[0];
+    result["stop"]  = +_[1];
+
+    return result;
+  }
+
   function clean() {
     main.html("");
 
@@ -66,7 +82,7 @@ bb.viz = function() {
 
     var p =  main.append("p").attr("class", "region");
 
-    p.text("Format: Chrm:start-end (Chr17:1100000-1200000)");
+    p.text("Region (Ex. Chr17:1100000-1200000)");
 
     p.append("input")
       .attr("type", "text")
@@ -77,22 +93,14 @@ bb.viz = function() {
       .attr("href", "#")
       .text("Viz it!")
       .on("click", function() {
+        var c = getRegion();
         clean();
-        horizon(1100000, 1200000, "Chr17");
+        if (c)
+          horizon(c["start"], c["stop"], c["chrm"]);
+        else
+          console.log("Problems parsing region.");
       });
   }
 
-
-  _viz.init = function(d) {
-    data = d;
-    clean();
-    return _viz;
-  }
-
-  _viz.render = function() {
-    main.append("p").text(JSON.stringify(data));
-    return _viz;
-  }
-
-  return _viz;
+  clean();
 }

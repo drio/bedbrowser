@@ -77,7 +77,7 @@ bb.browser = function() {
   }
 
   function run() {
-    bb.viz().init(list.active()).render();
+    bb.viz(list.active());
   }
 
   function loadData(callback) {
