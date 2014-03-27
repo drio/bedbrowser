@@ -14,6 +14,9 @@ bb.viz = function(data) {
                    .chrm(chrm)
                    .step(2);
 
+    plots.selectAll().remove();
+    d3.select(".current-region").remove();
+
     main.append("div")
         .attr("class", "current-region")
         .text(chrm + ":" + start + "-" + stop);
