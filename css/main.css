@@ -44,7 +44,7 @@ button.all {
   background: rgb(28, 184, 65); /* this is a green */
 }
 
-button.none {
+button.none, button.vizit {
   background: rgb(223, 117, 20); /* this is an orange */
 }
 
@@ -54,4 +54,8 @@ button:hover {
 
 button.small-button:hover {
   background-color: steelblue;
+}
+
+.ribbon {
+  position: fixed; top: 0; right: 0; border: 0;
 }

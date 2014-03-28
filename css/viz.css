@@ -1,3 +1,35 @@
+/*
+vim: ts=2 expandtab:
+*/
+input.input-text {
+  font-size: 120%;
+  color: #5a5854;
+  background-color: #f2f2f2;
+  border: 1px solid #bdbdbd;
+  border-radius: 5px;
+  padding: 5px 5px 5px 30px;
+  background-repeat: no-repeat;
+  background-posit5ion: 8px 9px;
+  margin-bottom: 10px;
+}
+
+input:focus {
+  background-color: #ffffff;
+  border: 1px solid #b1e1e4;
+}
+
+.region {
+  margin-top: 10px;
+}
+
+.current-region {
+  font-size: 100%;
+  font-style: italic;
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
 .group {
   margin-bottom: 1em;
 }

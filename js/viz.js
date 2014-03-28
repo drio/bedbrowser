@@ -84,18 +84,20 @@ bb.viz = function(data) {
 
     var p =  main.append("p").attr("class", "region");
 
-    p.text("Region (Ex. Chr17:1100000-1200000)");
-
     p.append("input")
       .attr("type", "text")
+      .attr("size", "45")
       .attr("id", "region")
+      .attr("placeholder", "Region (Ex. Chr17:1100000-1200000)")
       .attr("class", "input-text");
 
     p.append("button")
       .text("Viz it!")
+      .attr("class", "vizit")
       .on("click", function() {
         var c = getRegion();
         clean();
+        console.log("here");
         if (c)
           horizon(c["start"], c["stop"], c["chrm"]);
         else
