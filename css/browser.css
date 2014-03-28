@@ -1,3 +1,7 @@
+/*
+vim: ts=2 expandtab:
+*/
+
 h2 {
 }
 
@@ -5,8 +9,29 @@ a {
   margin: 2px;
 }
 
-.project {
-  color: red;
+p {
+  margin: 2px;
+  padding: 2px;
+}
+
+p.sample {
+  padding-left: 20px;
+}
+
+p.project {
+  font-size: 110%;
+  font-weight: bold;
+  font-style: italic;
+  text-transform: uppercase;
+  padding-top: 20px;
+  padding-bottom: 10px;
+  padding-right: 4px;
+  color: black;
+}
+
+text.project {
+  margin: 0px;
+  padding-right: 8px;
 }
 
 .sample {

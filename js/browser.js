@@ -51,22 +51,25 @@ bb.browser = function() {
   }
 
   function createPrj(prj) {
-   var p =  main.append("p")
-                .text(prj).attr("class", "project");
+   var p =  main.append("p").attr("class", "project");
 
-    p.append("a")
-     .attr("href", "#")
-     .text("all")
-     .on("click", function() { list.setAll(prj, true); });
+   p.append("text")
+    .text(prj)
+    .attr("class", "project");
 
-    p.append("a")
-     .attr("href", "#")
-     .text("none")
-     .on("click", function() { list.setAll(prj, name); });
+   p.append("button")
+    .text("all")
+    .attr("class", "small-button all")
+    .on("click", function() { list.setAll(prj, true); });
+
+   p.append("button")
+    .text("none")
+    .attr("class", "small-button none")
+    .on("click", function() { list.setAll(prj, name); });
   }
 
   function createSample(prj, sample) {
-    var i = main.append("p");
+    var i = main.append("p").attr("class", "sample");
 
     i.append("input")
      .attr("type", "checkbox")
@@ -91,8 +94,7 @@ bb.browser = function() {
   function renderView(projects) {
     main.html("");
 
-    main.append("a")
-     .attr("href", "#")
+    main.append("button")
      .text("Run")
      .on("click", run);
 

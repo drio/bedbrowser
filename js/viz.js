@@ -75,8 +75,7 @@ bb.viz = function(data) {
   function clean() {
     main.html("");
 
-    main.append("a")
-     .attr("href", "#")
+    main.append("button")
      .text("Back to browsing projects")
      .on("click", function() {
        plots.html("");
@@ -92,8 +91,7 @@ bb.viz = function(data) {
       .attr("id", "region")
       .attr("class", "input-text");
 
-    p.append("a")
-      .attr("href", "#")
+    p.append("button")
       .text("Viz it!")
       .on("click", function() {
         var c = getRegion();

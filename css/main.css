@@ -1,10 +1,57 @@
+/*
+vim: ts=2 expandtab:
+*/
 body {
-  font-family: "Helvetica Neue", Helvetica, sans-serif;
+  font-family: 'AvenirNextLTW01-Regular', Helvetica, sans-serif;
   margin: 30px auto;
   width: 900px;
   position: relative;
 }
 
 header {
-  padding: 6px 0;
+}
+
+button {
+  font-size: 13px;
+  color: #fff;
+  background-color: #222;
+  background-image: -moz-linear-gradient(top, rgba(255,255,255,.25), rgba(255,255,255,.11));
+  background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, rgba(255,255,255,.25)),color-stop(1, rgba(255,255,255,.11)));
+  background-image: -webkit-linear-gradient(rgba(255,255,255,.25), rgba(255,255,255,.11));
+  text-rendering: optimizeLegibility;
+  text-shadow: 0 -1px 1px #222;
+  padding: 4px 6px 4px 6px;
+  border: 0;
+  border-radius: 5px;
+  border-bottom: 0px solid #222;
+  margin-left: 4px;
+  -moz-box-shadow: 0 1px 3px #999;
+  -webkit-box-shadow: 0 1px 3px #999;
+}
+
+button.small-button {
+  font-size: 50%;
+  font-weight: normal;
+  padding: 3px 5px 3px 5px;
+  color: white;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  margin-left: 2px;
+  margin-right: 2px;
+  margin-bottom: 0px;
+}
+
+button.all {
+  background: rgb(28, 184, 65); /* this is a green */
+}
+
+button.none {
+  background: rgb(223, 117, 20); /* this is an orange */
+}
+
+button:hover {
+  background-color: steelblue;
+}
+
+button.small-button:hover {
+  background-color: steelblue;
 }
