@@ -40,19 +40,19 @@ Now, let's download the webbroser webapp in the current directory. Along
 with the app, we are going to download a couple of testing datasets to
 be able to use the app. You can later add your own datasets:
 
-`sh
+```sh
 $ cd /somewhere
-$ curl -L https://github.com/drio/bedbrowser/tarball/master | tar zxvf -`
-`
+$ curl -L https://github.com/drio/bedbrowser/tarball/master | tar zxvf -
+```
 
 Now fire up the bedserver:
 
-`sh
+```sh
 $ cd /somewhere
 $ bedserver
  * Running on http://127.0.0.1:5000/
  * Restarting with reloader
-`
+````
 
 And, now fire up your browser and go to `localhost:5000/index.html`. You should
 see something like this:
