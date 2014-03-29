@@ -14,46 +14,47 @@ bb.viz = function(data) {
                    .chrm(chrm)
                    .step(2);
 
-    plots.selectAll().remove();
+    plots.selectAll("div").remove();
     d3.select(".current-region").remove();
 
-    main.append("div")
-        .attr("class", "current-region")
-        .text(chrm + ":" + start + "-" + stop);
+    // FIXME: There has to be a better way to do this.
+    // We wait half a second to make sure the elements removed
+    // in the previous statements are  removed from the DOM.
+    window.setTimeout(function() {
+      main.append("div")
+          .attr("class", "current-region")
+          .text(chrm + ":" + start + "-" + stop);
 
-    plots.selectAll(".axis")
-        .data(["top", "bottom"])
-      .enter().append("div")
-        .attr("class", function(d) { return d + " axis"; })
-        .each(function(d) { d3.select(this).call(context.axis().ticks(12).orient(d)); });
+      plots.selectAll(".axis")
+          .data(["top", "bottom"])
+        .enter().append("div")
+          .attr("class", function(d) { return d + " axis"; })
+          .each(function(d) { d3.select(this).call(context.axis().ticks(12).orient(d)); });
 
+      plots.append("div")
+          .attr("class", "rule")
+          .call(context.rule());
 
-    plots.append("div")
-        .attr("class", "rule")
-        .call(context.rule());
-
-
-    var source_bedserver = context.bedserver(bb.server);
-    var metrics = [];
-    Object.keys(data).forEach(function (prjName) {
-      Object.keys(data[prjName]).forEach(function (sampleName) {
-        if (data[prjName][sampleName])
-          metrics.push(source_bedserver.metric(prjName, sampleName));
+      var source_bedserver = context.bedserver(bb.server);
+      var metrics = [];
+      Object.keys(data).forEach(function (prjName) {
+        Object.keys(data[prjName]).forEach(function (sampleName) {
+          if (data[prjName][sampleName])
+            metrics.push(source_bedserver.metric(prjName, sampleName));
+        });
       });
-    });
 
+      plots.selectAll(".horizon")
+          .data(metrics)
+        .enter().insert("div", ".bottom")
+          .attr("class", "horizon")
+        .call(context.horizon()
+          .format(d3.format(".2")));
 
-    plots.selectAll(".horizon")
-        .data(metrics)
-      .enter().insert("div", ".bottom")
-        .attr("class", "horizon")
-      .call(context.horizon()
-        .format(d3.format(".2")));
-
-    context.on("focus", function(i) {
-      d3.selectAll(".value").style("right", i == null ? null : context.size() - i + "px");
-    });
-
+      context.on("focus", function(i) {
+        d3.selectAll(".value").style("right", i == null ? null : context.size() - i + "px");
+      });
+    }, 500);
   }
 
   function getRegion() {
@@ -97,7 +98,6 @@ bb.viz = function(data) {
       .on("click", function() {
         var c = getRegion();
         clean();
-        console.log("here");
         if (c)
           horizon(c["start"], c["stop"], c["chrm"]);
         else
