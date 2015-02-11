@@ -87,9 +87,9 @@ bb.viz = function(data) {
 
     p.append("input")
       .attr("type", "text")
-      .attr("size", "45")
+      .attr("size", "65")
       .attr("id", "region")
-      .attr("placeholder", "Region (Ex. Chr17:1100000-1200000)")
+      .attr("placeholder", "In this example, we only have data for region: Chr17:1100000-1200000")
       .attr("class", "input-text");
 
     p.append("button")
