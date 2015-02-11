@@ -83,13 +83,22 @@ bb.viz = function(data) {
        bb.browser();
      });
 
+    main.append("p")
+      .attr("class", "note")
+      .text("NOTE: The depth dataset contains data only for region Chr17:1100000-1200000.");
+
+    main.append("p")
+      .attr("class", "note")
+      .text("NOTE: The snp density dataset contains data only for Chr1.");
+
+
     var p =  main.append("p").attr("class", "region");
 
     p.append("input")
       .attr("type", "text")
       .attr("size", "65")
       .attr("id", "region")
-      .attr("placeholder", "In this example, we only have data for region: Chr17:1100000-1200000")
+      .attr("placeholder", "format: chrm:start-stop; Example: Chr17:1100000-1200000")
       .attr("class", "input-text");
 
     p.append("button")

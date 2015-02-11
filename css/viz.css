@@ -115,3 +115,7 @@ input:focus {
   background: #000;
   z-index: 2;
 }
+
+.note {
+  padding-top: 15px;
+}
