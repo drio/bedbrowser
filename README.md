@@ -43,12 +43,12 @@ be able to use the app. You can later add your own datasets:
 ```sh
 $ cd /somewhere
 $ curl -L https://github.com/drio/bedbrowser/tarball/master | tar zxvf -
+$  cd drio-bedbrowser-*
 ```
 
 Now fire up the bedserver:
 
 ```sh
-$ cd /somewhere
 $ bedserver
  * Running on http://127.0.0.1:5000/
  * Restarting with reloader
